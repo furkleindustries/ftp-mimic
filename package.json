@@ -1,48 +1,67 @@
 {
-  "private": true,
   "name": "ftp-mimic",
   "version": "1.0.0",
-  "license": "GPL-3.0",
+  "description": "A simple widget which converts plain JavaScript config objects into a responsive, modern imitation of an Apache 2 style automatic directory listing.",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.m.js",
+  "source": "components/hello-world/index.js",
   "scripts": {
+    "test": "NODE_ENV=test jest",
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build",
-    "serve": "preact build && preact serve",
-    "dev": "preact watch",
-    "lint": "eslint src"
+    "build": "preact build --no-prerender --clean --template src/index.ejs --service-worker false",
+    "serve": "npm run build && preact serve",
+    "dev": "preact watch --template src/index.ejs",
+    "dist": "microbundle --entry src/components/ftpMimic/index.js"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-synacor",
-    "rules": {
-      "no-unused-vars": "warn",
-      "react/sort-comp": "off",
-      "lines-around-comment": "off",
-      "react/prefer-stateless-function": "off"
-    }
-  },
-  "eslintIgnore": [
-    "build/*"
-  ],
+  "keywords": [],
+  "author": "furkle",
+  "license": "GPL-3.0",
   "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-synacor": "^1.1.0",
+    "eslint": "^5.16.0",
+    "identity-obj-proxy": "^3.0.0",
     "if-env": "^1.0.0",
-    "preact-cli": "^2.0.0"
+    "jest": "^24.7.1",
+    "microbundle": "^0.11.0",
+    "node-sass": "^4.11.0",
+    "preact-cli": "^2.2.1",
+    "preact-render-to-string": "^3.7.0",
+    "preact-widget-scripts": "^0.6.0",
+    "sass-loader": "^6.0.6"
   },
   "dependencies": {
-    "preact": "^8.2.1",
+    "preact": "^8.2.5",
     "preact-compat": "^3.17.0",
-    "preact-router": "^2.5.5",
-    "preact-material-components": "^1.4.3"
+    "preact-habitat": "^3.1.0",
+    "preact-router": "^2.5.7"
   },
-  "description": "Super performant `Material` app for preact world using [preact-material-components](https://github.com/prateekbh/preact-material-components)",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/furkleindustries/ftp-mimic.git"
-  },
-  "author": "furkle",
-  "bugs": {
-    "url": "https://github.com/furkleindustries/ftp-mimic/issues"
-  },
-  "homepage": "https://github.com/furkleindustries/ftp-mimic#readme"
+  "jest": {
+    "verbose": true,
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|scss|less)$": "identity-obj-proxy",
+      "^react$": "preact-compat",
+      "^react-dom$": "preact-compat"
+    },
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
+  }
 }

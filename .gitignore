@@ -1,0 +1,11 @@
+build/
+dist/
+node_modules/
+
+# Edited by library consumers
+local-config.js
+
+.vscode
+*.log
+*.swp
+*.tmp

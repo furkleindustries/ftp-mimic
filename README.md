@@ -1,10 +1,9 @@
-# preact material app
-
-Super performant `Material` app for preact world using [preact-material-components](https://github.com/prateekbh/preact-material-components)
+# ftp-mimic
+A simple widget which converts plain JavaScript config objects into a responsive, modern imitation of an Apache 2 style automatic directory listing.
 
 ## CLI Commands
 
-``` bash
+```bash
 # install dependencies
 npm install
 
@@ -15,7 +14,5 @@ npm run dev
 npm run build
 
 # test the production build locally
-npm run serve
+npm run start
 ```
-
-For detailed explanation on how things work, checkout the [CLI Readme](https://github.com/developit/preact-cli/blob/master/README.md).
