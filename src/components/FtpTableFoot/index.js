@@ -1,4 +1,8 @@
 import {
+  formatDate,
+} from '../../functions/formatDate';
+
+import {
   h,
   Component,
 } from 'preact';
@@ -25,11 +29,7 @@ export class FtpTableFoot extends Component {
           </strong>
           &nbsp;|&nbsp;
           <strong>
-            <time>
-              {(currentFile || currentDir)
-                  .lastModified
-                  .toLocaleTimeString('en-us')}
-            </time>
+            <time>{formatDate((currentFile || currentDir).lastModified)}</time>
           </strong>
         </td>
       </tr>

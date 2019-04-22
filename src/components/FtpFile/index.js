@@ -1,4 +1,8 @@
 import {
+  formatDate,
+} from '../../functions/formatDate';
+
+import {
   h,
   Component,
 } from 'preact';
@@ -24,9 +28,7 @@ export class FtpFile extends Component {
       </td>
 
       <td class={styles.lastModified}>
-        <time>
-          {file.lastModified.toLocaleTimeString('en-us')}  
-        </time>  
+        <time>{formatDate(file.lastModified)}</time>
       </td>
 
       <td class={styles.size}>

@@ -82,6 +82,8 @@ export class FtpMimic extends Component {
   removeDirComponent = (path) => path.split('/').slice(0, -1).join('/') || '/';
 
   showFile = (name) => this.setState({
-    currentPath: `${this.state.currentPath}/${name}`,
+    currentPath: /\/$/.test(this.state.currentPath) ?
+      `${this.state.currentPath}${name}` :
+      `${this.state.currentPath}/${name}`,
   });
 }
