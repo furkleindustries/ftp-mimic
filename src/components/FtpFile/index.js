@@ -24,7 +24,9 @@ export class FtpFile extends Component {
       </td>
 
       <td class={styles.lastModified}>
-        {file.lastModified}
+        <time>
+          {file.lastModified.toLocaleTimeString('en-us')}  
+        </time>  
       </td>
 
       <td class={styles.size}>

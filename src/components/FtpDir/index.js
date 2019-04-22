@@ -24,7 +24,9 @@ export class FtpDir extends Component {
       </td>
 
       <td class={styles.lastModified}>
-        <time>{file.lastModified}</time>
+        <time>
+          {file.lastModified.toLocaleTimeString('en-us')}
+        </time>
       </td>
 
       <td class={styles.size}>-</td>
