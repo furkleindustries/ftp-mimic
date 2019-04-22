@@ -22,8 +22,8 @@ export function filesAreValid(files) {
       return true;
     }
 
-    if (!file.dateModified) {
-      DEBUG || console.error('File has no date modified field.');
+    if (!file.lastModified) {
+      DEBUG || console.error('File has no last modified field.');
       return true;
     }
 

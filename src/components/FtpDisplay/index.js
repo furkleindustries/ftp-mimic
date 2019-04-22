@@ -1,60 +1,54 @@
 import {
-  FtpDir,
-} from '../FtpDir';
+  FtpTableBody,
+} from '../FtpTableBody';
+import {
+  FtpTableCaption,
+} from '../FtpTableCaption';
+import {
+  FtpTableFoot,
+} from '../FtpTableFoot';
+import {
+  FtpTableHead,
+} from '../FtpTableHead';
 
 import {
   h,
   Component,
 } from 'preact';
 
+import styles from './style.scss';
+
 export class FtpDisplay extends Component {
   render = ({
+    clickBackLink,
     clickDirLink,
     clickFileLink,
     currentDir,
     currentFile,
     currentPath,
   }) => (
-    <div>
-      {currentFile ?
-        <h1>Now viewing {currentPath}</h1> :
-        <h1>Index of {currentPath}</h1>}
+    <table class={styles.ftpDisplay}>
+      <FtpTableCaption
+        currentFile={currentFile}
+        currentPath={currentPath}
+      />
 
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Last modified</th>
-          <th>Size</th>
-          <th>Description</th>
-        </tr>
+      <FtpTableHead />
 
-        <tr>
-          <td>
-            <a
-              tabIndex={0}
-              role="button"
-              onClick={this.clickBackLink}
-            >
-              Back
-            </a>
-          </td>
-        </tr>
+      <FtpTableBody
+        clickBackLink={clickBackLink}
+        clickDirLink={clickDirLink}
+        clickFileLink={clickFileLink}
+        currentDir={currentDir}
+        currentFile={currentFile}
+        currentPath={currentPath}
+      />
 
-        {currentFile ?
-          <tr>
-            <FtpFile
-              file={currentFile}
-              shown={true}
-            />
-          </tr> :
-          <FtpDir
-            clickDirLink={clickDirLink}
-            clickFileLink={clickFileLink}
-            file={currentDir}
-            name="$ROOT$"
-            shown={true}
-          />}
-      </table>
-    </div>
+      <FtpTableFoot
+        currentDir={currentDir}
+        currentFile={currentFile}
+        currentPath={currentPath}
+      />
+    </table>
   );
 }

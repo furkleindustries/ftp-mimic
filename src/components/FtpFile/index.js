@@ -3,39 +3,37 @@ import {
   Component,
 } from 'preact';
 
+import styles from './style.scss';
+
 export class FtpFile extends Component {
   render = ({
     clickFileLink,
     file,
     name,
-    shown,
   }) => (
-    shown ?
-      <div>
-        {file.contents}
-      </div> :
-      <div>
-        <tr>
-          <a
-            onClick={() => clickFileLink(name)}
-            role="button"
-            tabIndex={0}
-          >
-            {name}
-          </a>
-        </tr>
+    <tr class={styles.ftpFile}>
+      <td class={styles.nameLinkContainer}>
+        <a
+          class={styles.link}
+          onClick={() => clickFileLink(name)}
+          role="link"
+          tabIndex={0}
+        >
+          {name}
+        </a>
+      </td>
 
-        <tr>
-          {file.lastModified}
-        </tr>
+      <td class={styles.lastModified}>
+        {file.lastModified}
+      </td>
 
-        <tr>
-          {file.size}
-        </tr>
+      <td class={styles.size}>
+        {file.size}
+      </td>
 
-        <tr>
-          {file.description}
-        </tr>
-      </div>
+      <td class={styles.description}>
+        {file.description}
+      </td>
+    </tr>
   );
 }

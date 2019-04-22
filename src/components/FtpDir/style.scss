@@ -1,0 +1,26 @@
+.ftpDir {
+  position: relative;
+}
+
+.nameLinkContainer {
+  width: 40%;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &.visited {
+    color: purple;
+  }
+}
+
+.lastModified {
+  width: 20%;
+}
+
+.size {
+  width: 15%;
+}
+
+.description {
+  width: 25%;
+}

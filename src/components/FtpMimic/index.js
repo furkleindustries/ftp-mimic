@@ -13,7 +13,7 @@ import {
   Component,
 } from 'preact';
 
-import './style.scss';
+import styles from './style.scss';
 
 export class FtpMimic extends Component {
   state = { currentPath: '/' };
@@ -24,8 +24,9 @@ export class FtpMimic extends Component {
   }
 
   render = ({}, { currentPath }) => (
-    <div>
+    <div class={styles.ftpMimic}>
       <FtpDisplay
+        clickBackLink={this.clickBackLink}
         clickDirLink={this.clickDirLink}
         clickFileLink={this.clickFileLink}
         currentDir={this.getDir(currentPath)}
@@ -35,7 +36,9 @@ export class FtpMimic extends Component {
     </div>
   );
 
-  addDirComponent = (path, name) => `${path}/${name}`;
+  addDirComponent = (path, name) => /\/$/.test(path) ?
+    `${path}${name}` :
+    `${path}/${name}`;
 
   clickBackLink = () => this.popDirectory();
 
@@ -47,7 +50,7 @@ export class FtpMimic extends Component {
     const rootDir = {
       name: '$ROOT$',
       children: this.state.files,
-      dateModified: 0,
+      lastModified: new Date(),
     };
 
     if (path === '/') {
@@ -55,18 +58,12 @@ export class FtpMimic extends Component {
     }
 
     return assertValid(
-      path.split('/').reduce((dir, pathSegment) => {
-        if (!dir) {
-          return dir;
-        }
-
-        if (/\.[a-z0-9]+$/i.test(pathSegment)) {
-          /* Don't return files even if the current path is a file. */
-          return dir;
-        }
-        
-        return dir.children[pathSegment];
-      }, rootDir),
+      path.split('/').filter(Boolean).reduce((dir, pathSegment) => (
+        /* Don't return files even if the current path is a file. */
+        !dir || /\.[a-z0-9]+$/i.test(pathSegment) ?
+          dir :
+          dir.children[pathSegment]
+      ), rootDir),
     );
   };
 

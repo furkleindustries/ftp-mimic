@@ -1,0 +1,27 @@
+.ftpFile {
+  display: table-row;
+
+  .shown {
+    position: relative;
+  }
+
+  .notShown {
+    position: relative;
+  }
+}
+
+.nameLinkContainer {
+  width: 40%;
+}
+
+.lastModified {
+  width: 20%;
+}
+
+.size {
+  width: 15%;
+}
+
+.description {
+  width: 25%;
+}
